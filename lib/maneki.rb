@@ -120,54 +120,54 @@ class Maneki
   # Create a new document
   def initialize (args = {})
     @filename = File.expand_path(args[:filename])
-	  
-		@body = ''
-		if File.exists? @filename		  
-			@category = File.dirname(@filename).split('/').last unless @category		
-			@slug = @filename.gsub(File.expand_path(self.class.path) + '/', '').gsub(/\..+$/, '')
-			
-			body = File.open(@filename).readlines
-			body.each do |line|
-				line.gsub!("\r", '') # fix up any DOS EOLs
-			end
+    
+    @body = ''
+    if File.exists? @filename		  
+      @category = File.dirname(@filename).split('/').last unless @category		
+      @slug = @filename.gsub(File.expand_path(self.class.path) + '/', '').gsub(/\..+$/, '')
+      
+      body = File.open(@filename).readlines
+      body.each do |line|
+        line.gsub!("\r", '') # fix up any DOS EOLs
+      end
 
-			title = body.find { |item| /^\#.+/.match item }
-			body = body[2..body.length-1] if title # consume title
+      title = body.find { |item| /^\#.+/.match item }
+      body = body[2..body.length-1] if title # consume title
 
       # check for headers
       @headers = Hash.new
       if /^\s?\-.+/.match(body[0])
-			  headers_end = body.index("\n") || 1
-				headers = body[0..headers_end-1] if headers_end # next blank line is end of headers
+        headers_end = body.index("\n") || 1
+        headers = body[0..headers_end-1] if headers_end # next blank line is end of headers
 
-				body_start = 1
-				body_start = body.index(headers.last) + 1 if headers
-				body = body[body_start..body.length - 1] if title
+        body_start = 1
+        body_start = body.index(headers.last) + 1 if headers
+        body = body[body_start..body.length - 1] if title
 
-				headers.each do |header|
-					unless header.strip == '' or /^\#.+/.match header
-						values = header.gsub(/^\s?\-/, '').strip.split(/:\s/)
-						key = values.shift.downcase.gsub(/[^\w\_]+/, '_').to_sym
-						value = values.join(': ').strip
-						# check for special header values (true, false, lists, etc)
-						if ['true', 't', 'yes', 'y'].include? value
-						  value = true
-						elsif ['false', 'f', 'no', 'n'].include? value
-						  value = false
-						elsif value.include? ','
-						  value = value.split(/\,\s?/)
-						end
-						@headers[key] = value
-					end
-				end if headers
-			end
+        headers.each do |header|
+          unless header.strip == '' or /^\#.+/.match header
+            values = header.gsub(/^\s?\-/, '').strip.split(/:\s/)
+            key = values.shift.downcase.gsub(/[^\w\_]+/, '_').to_sym
+            value = values.join(': ').strip
+            # check for special header values (true, false, lists, etc)
+            if ['true', 't', 'yes', 'y'].include? value
+              value = true
+            elsif ['false', 'f', 'no', 'n'].include? value
+              value = false
+            elsif value.include? ','
+              value = value.split(/\,\s?/)
+            end
+            @headers[key] = value
+          end
+        end if headers
+      end
 
-			# title
-			@title = title.gsub(/^\#\s/, '').strip if title
+      # title
+      @title = title.gsub(/^\#\s/, '').strip if title
 
-			# content
-			@body = body.join("").strip
-		end
+      # content
+      @body = body.join("").strip
+    end
   end
   
   
@@ -223,9 +223,9 @@ class Maneki
         @documents = []
         @categorised = {}
 
-  			# find some documents
-  			Dir.glob(["#{files_path}*", "#{files_path}*/*"]).each do |filename|
-  			  if filename.split('.').last == 'text'
+        # find some documents
+        Dir.glob(["#{files_path}*", "#{files_path}*/*"]).each do |filename|
+          if filename.split('.').last == 'text'
             document = new(:filename => filename)
             if document.valid?
               @documents << document
@@ -233,9 +233,9 @@ class Maneki
               @categorised[document.category] << document
             end
           end
-  		  end
-  		  @documents.sort!
-  		end
-  		@documents
+        end
+        @documents.sort!
+      end
+      @documents
     end
 end
