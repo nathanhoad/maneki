@@ -15,11 +15,35 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = [
     "README.markdown"
   ]
+  s.files = [
+    "README.markdown",
+     "Rakefile",
+     "VERSION",
+     "lib/maneki.rb",
+     "maneki.gemspec",
+     "test/chapter.rb",
+     "test/content/chapters/01-the-first-chapter.text",
+     "test/content/chapters/02-chapter-2.text",
+     "test/content/chapters/03-chapter-with-headers.text",
+     "test/content/chapters/04-different-chapter.text",
+     "test/content/documents/first-document.text",
+     "test/content/documents/second-document.text",
+     "test/content/documents/third-document.text",
+     "test/test_all.rb",
+     "test/test_chapters.rb",
+     "test/test_maneki.rb"
+  ]
   s.homepage = %q{http://github.com/nathanhoad/maneki}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{A simple file-based model for your Ruby projects}
+  s.test_files = [
+    "test/chapter.rb",
+     "test/test_all.rb",
+     "test/test_chapters.rb",
+     "test/test_maneki.rb"
+  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
