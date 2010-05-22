@@ -45,7 +45,7 @@ class Maneki
       return find_by_slug(args[:slug] || args)
     end
     
-    match = args[:match] || :any
+    match = args[:match] || :all
     args.delete(:match)
     
     all.select do |item|
