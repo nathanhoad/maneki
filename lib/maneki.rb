@@ -200,7 +200,7 @@ class Maneki
     # Grab the @path with a slash if needed
     def self.path_with_slash
       files_path = File.expand_path(@path)
-      files_path += '/' unless files_path.end_with? '/'
+      files_path += '/' unless files_path.match /\/$/
       files_path
     end
     
