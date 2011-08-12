@@ -41,8 +41,10 @@ class Maneki
   
   # Search for any documents
   def self.find (args = {})
-    if args[:slug] or args.is_a? String
-      return find_by_slug(args[:slug] || args)
+    if args.is_a? String
+      return find_by_slug(args)
+    elsif args[:slug]
+      return find_by_slug(args[:slug])
     end
     
     match = args[:match] || :all
@@ -128,7 +130,7 @@ class Maneki
       
       body = File.open(@filename).readlines
       body.each do |line|
-        line.gsub!("\r", '') # fix up any DOS EOLs
+        line.chomp!("\r") # fix up any DOS EOLs
       end
 
       title = body.find { |item| /^\#.+/.match item }
