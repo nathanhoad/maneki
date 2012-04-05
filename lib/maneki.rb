@@ -18,6 +18,17 @@ class Maneki
     @path
   end
   
+  # Set the file extension
+  def self.extension= (value)
+    extension value
+  end
+
+  # Set or get the file extension
+  def self.extension (value = nil)
+    @extension = value if value
+    @extension || 'text'
+  end
+
 
   # Set the general category for these documents
   def self.category (value = nil)
@@ -209,7 +220,7 @@ class Maneki
     
     # Find a document by its slug
     def self.find_by_slug (slug)
-      filename = path_with_slash + slug + '.text'
+      filename = path_with_slash + slug + '.' + extension
       if File.exists? filename
         document = new(:filename => filename)
         document if document.valid?
@@ -227,7 +238,7 @@ class Maneki
 
         # find some documents
         Dir.glob(["#{files_path}*", "#{files_path}*/*"]).each do |filename|
-          if filename.split('.').last == 'text'
+          if filename.split('.').last == extension
             document = new(:filename => filename)
             if document.valid?
               @documents << document
