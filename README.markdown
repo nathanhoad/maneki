@@ -99,10 +99,10 @@ If you want to get a list of the found categories then ask for it.
     Maneki.categories
 
 
-Full Example
+Example project
 ------------
 
-Have a look at [my Maneki Example repository](http://github.com/nathanhoad/maneki-example) for a full example of using Maneki (with Sinatra).
+Maneki is currently powering [nathanhoad.net](http://nathanhoad.net) (along with Sinatra) so feel free to [check out the source](http://github.com/nathanhoad/nathanhoad).
 
 
 Suggestions?
