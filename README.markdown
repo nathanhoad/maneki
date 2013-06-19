@@ -6,7 +6,7 @@ Maneki is a simple file-based model for your Ruby projects. Give it a directory 
 For example you might have a model like this:
 
     class Document < Maneki
-      path_is '../content/documents'
+      path '../content/documents'
     end
 
 ...and a directory, `documents`, that contains a bunch of markdown documents:
